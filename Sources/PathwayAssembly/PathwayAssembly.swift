@@ -38,6 +38,9 @@ public struct PathwayAssembly {
         return newArr
     }
 
+    // FIXME: ["z": "LKJSDF", "0": "SDFzz"] we have to also resymbolicate SDF as a separate symbol
+    // In fact, we have to not only look for repeating occurences in the root but after that in the entire CT.
+    // ABCDEFGHDEFABCDEFDEFGHDEF -> ABCDEF GHDEF ABCDEF DEF GHDEF
     static public func resymbolicate(ST: [String: String], symbol: String, match: String, newSymbol: String) -> [String: String] {
         var newST = ST
         guard let wordToResymbolicate = ST[symbol] else {
