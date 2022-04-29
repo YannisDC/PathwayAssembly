@@ -52,7 +52,7 @@ public struct PathwayAssembly {
     static public func depthSearch(str: String) -> [String: Int] {
         let length = str.count
         var tree = [String: Int]()
-        for x in length.halves() {
+        for x in length.halves {
             let dups = findAllDuplicatesIn(ST: ["0": str], forLength: x, substitutionSymbols: Substitution.shared.dummySymbols)
             // Throwing away the duplicates is not really efficient but it saves memory, I guess
             tree[String(x)] = dups?.count ?? 0

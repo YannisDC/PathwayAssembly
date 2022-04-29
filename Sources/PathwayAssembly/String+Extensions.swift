@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  String+Extensions.swift
 //  
 //
 //  Created by Yannis De Cleene on 17/03/2022.
@@ -8,6 +8,9 @@
 import Foundation
 
 extension String {
+    /// Returns a string where all non-overlapping occurences are replaced by a given symbol.
+    ///
+    /// "AAABAAC".substitute(occurence: "AA", symbol: "z") => "zABzC"
     func substitute(occurence: String, symbol: String) -> String {
         var newString = self
         while newString.contains(occurence) {
@@ -18,6 +21,8 @@ extension String {
         return newString
     }
 
+    /// Returns repeating substrings of a string and the amount of (non-overlapping) occurences of the substring in the string.
+    /// "AAABAAC".subpatterns(ofLength: 2) => ["AA": 2]
     func subpatterns(ofLength x: Int) -> [String: Int] {
         var duplicates = [String: Int]()
 
@@ -56,7 +61,9 @@ extension String {
         return String(self[startIndex..<endIndex])
     }
 
-    // Non-overlapping
+    /// Returns the amount of non-overlapping occurences in a string
+    /// We can go with non-overlapping since we use cutting approach
+    /// so the biggest size repeating element would always win.
     func occurrences(of match: String) -> Int {
         let str = Array(self)
         let matchArr = Array(match)
@@ -84,24 +91,5 @@ extension String {
         }
 
         return matchCounter
-    }
-}
-
-extension Int {
-    func halves() -> [Int] {
-        var halves = [Int]()
-
-        func halve(of number: Int) {
-            if (number % 2 == 1) || (number == 2) {
-                return
-            }
-            let half = number / 2
-            halves.append(half)
-            halve(of: half)
-        }
-
-        halve(of: self)
-
-        return halves
     }
 }
